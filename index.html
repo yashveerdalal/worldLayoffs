@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Before & After: A SQL-Based Data Cleanup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Before &amp; After: A SQL-Based Data Cleanup</h1>
+
+  <div class="container-wrapper">
+    <div class="container">
+      <div class="divider"></div>
+
+      <div class="data-block">
+        <a href="raw-data.png" target="_blank">
+          <img src="raw-data.png" alt="Raw Data" />
+        </a>
+        <div class="label">Raw Data</div>
+        <a href="raw-data.csv" download class="btn">Download Raw Data</a>
+        <div class="explanation">
+          <div class="card-heading">Issues in Raw Dataset:</div>
+          <ul>
+            <li>Duplicate records without a unique identifier.</li>
+            <li>Untrimmed or inconsistently cased string values (e.g., <code>company</code>, <code>country</code>).</li>
+            <li>Inconsistent category labels such as variants of "Crypto".</li>
+            <li>Country names containing trailing punctuation (e.g., <code>United States.</code>).</li>
+            <li>Dates stored as strings in non-standard formats.</li>
+            <li>Empty strings present in critical fields such as <code>industry</code> and <code>total_laid_off</code>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="data-block">
+        <a href="cleaned-data.png" target="_blank">
+          <img src="cleaned-data.png" alt="Cleaned Data" />
+        </a>
+        <div class="label">Cleaned Data</div>
+        <a href="cleaned-data.csv" download class="btn">Download Cleaned Data</a>
+        <div class="explanation">
+          <div class="card-heading">Applied Cleaning Techniques:</div>
+          <ul>
+            <li>Used CTE with <code>ROW_NUMBER()</code> to identify and remove duplicates.</li>
+            <li>Applied trimming and case standardization to string fields.</li>
+            <li>Standardized categorical values for consistency (e.g., unified under "Crypto").</li>
+            <li>Cleaned country field by removing invalid characters like periods.</li>
+            <li>Converted string-based dates to SQL <code>DATE</code> format using <code>STR_TO_DATE()</code>.</li>
+            <li>Populated missing or blank entries using self-join based imputation logic.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="code-links">
+    <a href="https://github.com/yashveerdalal/dataCleaning/blob/main/layoffs_cleaning.sql" target="_blank">📂 View Source Code</a>
+    <a href="layoffs_cleaning.sql" download>⬇️ Download SQL File</a>
+    <a href="https://github.com/yashveerdalal/dataCleaning" target="_blank">🔗 Full GitHub Repository</a>
+    <a href="https://yashveerdalal.github.io/EDA-worldLayoffs/" target="_blank" class="highlight">➡️ Exploratory Data Analysis</a>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
